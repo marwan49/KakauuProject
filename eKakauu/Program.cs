@@ -1,4 +1,5 @@
 using eKakauu.Data;
+using eKakauu.Data.Services;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -10,6 +11,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnectionString")
     ));
+
+// Registra o serviço IChocolateService
+builder.Services.AddScoped<IChocolateService, ChocolateService>();
 
 var app = builder.Build();
 
@@ -30,7 +34,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=BuyChocolate}/{action=Index}/{id?}");
 
 //seed database
 AppDbInitializer.Seed(app);

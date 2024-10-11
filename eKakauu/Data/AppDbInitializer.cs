@@ -48,30 +48,36 @@ namespace eKakauu.Data
                     {
                         new Chocolate()
                         {
+                            imageURL = "ImageKakauu/chocolate.jpg",
                             Name = "Incrivel KakauDark",
                             ChocolateProcessing = "80%",
-                            Flavor = "Original",
+                            Flavor = "Kakau Amargo",
                             Validity = "20/01/2025",
+                            price = 9.00,
                             ChocolateTypek = ChocolateType.Amargo,
-                            CocoaId = 3,
+                            CocoaId = 2,
                         },
                         new Chocolate()
                         {
+                            imageURL = "ImageKakauu/ChocolateBranco.jpeg",
                             Name = "Incrivel KakauWhite",
                             ChocolateProcessing = "",
-                            Flavor = "Original",
+                            Flavor = "Kakau Branco",
                             Validity = "20/01/2025",
+                            price = 9.00,
                             ChocolateTypek = ChocolateType.Branco,
-                            CocoaId = 4,
+                            CocoaId = 1,
                         },
                         new Chocolate()
                         {
-                            Name = "Incrivel KakauBrownFruit",
+                            imageURL = "ImageKakauu/ChocolateMaracuja.jpeg",
+                            Name = "Kakau Ao Leite Com Maracuja Cremoso",
                             ChocolateProcessing = "40%",
                             Flavor = "Maracuja",
                             Validity = "20/01/2025",
+                            price = 12.00,
                             ChocolateTypek = ChocolateType.AoLeite,
-                            CocoaId = 3,
+                            CocoaId = 1,
                         },
                     });
                     context.SaveChanges();
