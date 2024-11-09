@@ -12,10 +12,10 @@ namespace eKakauu.Data.Services
             _context = context;
         }
 
-        public void Add(Chocolate chocolate)
+        public async Task AddAsync(Chocolate chocolate)
         {
-            _context.chocolates.Add(chocolate);
-            _context.SaveChanges();
+            await _context.chocolates.AddAsync(chocolate);
+            await _context.SaveChangesAsync();
         }
 
         public void Delete(int id)
@@ -23,20 +23,23 @@ namespace eKakauu.Data.Services
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<Chocolate>> GetAll()
+        public async Task<IEnumerable<Chocolate>> GetAllAsync()
         {
             var result = await _context.chocolates.ToListAsync();
             return result;
         }
 
-        public Chocolate GetById(int id)
+        public async Task<Chocolate> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var resul = await _context.chocolates.FirstOrDefaultAsync(n => n.Id == id);
+            return resul;
         }
 
-        public Chocolate Update(int id, Chocolate newChocolate)
+        public async Task<Chocolate> UpdateAsync(int id, Chocolate newChocolate)
         {
-            throw new NotImplementedException();
+            _context.Update(newChocolate);
+            await _context.SaveChangesAsync();
+            return newChocolate;
         }
     }
 }

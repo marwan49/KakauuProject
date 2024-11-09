@@ -17,7 +17,7 @@ namespace eKakauu.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var AllChocolates = await _service.GetAll();
+            var AllChocolates = await _service.GetAllAsync();
             return View(AllChocolates);
         }
 
@@ -36,9 +36,41 @@ namespace eKakauu.Controllers
             {
                 return View(chocolate);
             }
-            _service.Add(chocolate);
+            await _service.AddAsync(chocolate);
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> Details (int id)
+        {
+            var chocolateDetails = await _service.GetByIdAsync(id);
+
+            if (chocolateDetails == null)
+                return View("Kakaau não foi encontrado :(");
+
+            return View(chocolateDetails);
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var chocolateDetails = await _service.GetByIdAsync(id);
+
+            if (chocolateDetails == null)
+                return View("Kakaau não foi encontrado :(");
+
+            return View(chocolateDetails);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,imageURL,Name,ChocolateProcessing," +
+            "Flavor,Validity,price,ChocolateTypek")] Chocolate chocolate)
+        {
+            chocolate.CocoaId = 1;
+            if (!ModelState.IsValid)
+            {
+                return View(chocolate);
+            }
+            await _service.UpdateAsync(id, chocolate);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

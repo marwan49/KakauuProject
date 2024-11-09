@@ -16,7 +16,7 @@ namespace eKakauu.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var AllChocolates = await _service.GetAll();
+            var AllChocolates = await _service.GetAllAsync();
             return View(AllChocolates);
         }
     }
