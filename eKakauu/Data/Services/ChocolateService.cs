@@ -18,9 +18,11 @@ namespace eKakauu.Data.Services
             await _context.SaveChangesAsync();
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var result = await _context.chocolates.FirstOrDefaultAsync(c => c.Id == id);
+            _context.chocolates.Remove(result);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Chocolate>> GetAllAsync()

@@ -21,7 +21,7 @@ namespace eKakauu.Controllers
             return View(AllChocolates);
         }
 
-        //Get: Chocolates/Create
+        //Get: Chocolates/Create/1
         public IActionResult Create()
         {
             return View();
@@ -45,17 +45,18 @@ namespace eKakauu.Controllers
             var chocolateDetails = await _service.GetByIdAsync(id);
 
             if (chocolateDetails == null)
-                return View("Kakaau não foi encontrado :(");
+                return View("NotFound");
 
             return View(chocolateDetails);
         }
 
+        //Get: Chocolates/Edit/1
         public async Task<IActionResult> Edit(int id)
         {
             var chocolateDetails = await _service.GetByIdAsync(id);
 
             if (chocolateDetails == null)
-                return View("Kakaau não foi encontrado :(");
+                return View("NotFound");
 
             return View(chocolateDetails);
         }
@@ -70,6 +71,29 @@ namespace eKakauu.Controllers
                 return View(chocolate);
             }
             await _service.UpdateAsync(id, chocolate);
+            return RedirectToAction(nameof(Index));
+        }
+
+        //Get: Chocolates/Delete/1
+        public async Task<IActionResult> Delete(int id)
+        {
+            var chocolateDetails = await _service.GetByIdAsync(id);
+
+            if (chocolateDetails == null)
+                return View("NotFound");
+
+            return View(chocolateDetails);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirme(int id)
+        {
+            var chocolateDetails = await _service.GetByIdAsync(id);
+
+            if (chocolateDetails == null)
+                return View("NotFound");
+
+            await _service.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
         }
     }

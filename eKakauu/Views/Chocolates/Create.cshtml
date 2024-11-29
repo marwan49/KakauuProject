@@ -15,12 +15,19 @@
             border-color: #7A5230;
             color: white;
         }
+
+    .image-preview {
+        max-width: 300px; /* Largura máxima da imagem */
+        max-height: 300px; /* Altura máxima da imagem */
+        width: auto;
+        height: auto;
+    }
 </style>
 
 <div class="row text">
     <div class="col-md-8 offset-2">
         <p>
-            <h1> Adicionar um novo chocolate:</h1>
+            <h1>Adicionar um novo chocolate:</h1>
         </p>
         <div class="row">
             <div class="col-md-8 offset-2">
@@ -28,12 +35,12 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
                     <div class="form-group text-center">
-                        <img id="imagePreview" />
+                        <img id="imagePreview" class="image-preview" alt="Pré-visualização da Imagem" />
                     </div>
 
                     <div class="form-group mb-3">
                         <label asp-for="imageURL" class="control-label">URL da Imagem</label>
-                        <input asp-for="imageURL" class="form-control" placeholder="URL da Imagem" />
+                        <input asp-for="imageURL" class="form-control" placeholder="URL da Imagem" id="imageURL" />
                         <span asp-validation-for="imageURL" class="text-danger"></span>
                     </div>
 
@@ -95,16 +102,17 @@
         </div>
     </div>
 </div>
+
 @section Scripts {
     <script>
         $(document).ready(function () {
             var output = document.getElementById('imagePreview');
             output.src = $("#imageURL").val();
-        });
 
-        $("#imageURL").on("change", function () {
-            var output = document.getElementById('imagePreview');
-            output.src = $(this).val();
+            $("#imageURL").on("input", function () {
+                var output = document.getElementById('imagePreview');
+                output.src = $(this).val();
+            });
         });
     </script>
 }

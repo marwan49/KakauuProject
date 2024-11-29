@@ -1,0 +1,124 @@
+﻿@model Chocolate
+
+@{
+    ViewData["Title"] = "confiramação de exclusão";
+}
+
+<style>
+    .btn-outline-primary.custom {
+        color: #7A5230;
+        border-color: #7A5230;
+    }
+
+        .btn-outline-primary.custom:hover {
+            background-color: #7A5230;
+            border-color: #7A5230;
+            color: white;
+        }
+
+    .image-preview {
+        max-width: 300px; /* Largura máxima da imagem */
+        max-height: 300px; /* Altura máxima da imagem */
+        width: auto;
+        height: auto;
+    }
+
+    .btn-group {
+        display: inline-flex;
+        align-items: center;
+    }
+
+        .btn-group .btn {
+            margin-right: 10px; /* Espaçamento entre os botões */
+        }
+
+    .delete-form {
+        display: inline;
+    }
+</style>
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1>Deseja deletar mesmo <b>@Model.Name</b></h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <div class="form-group text-center">
+                    <img id="imagePreview" src="~/@Model.imageURL" alt="Imagem do Chocolate" class="image-preview" />
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="imageURL" class="control-label">URL da Imagem</label>
+                    <input asp-for="imageURL" class="form-control" placeholder="URL da Imagem" readonly />
+                    <span asp-validation-for="imageURL" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Name" class="control-label">Nome:</label>
+                    <input asp-for="Name" class="form-control" placeholder="Kakauu ao leite" readonly />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="ChocolateProcessing" class="control-label">% de Kakauu</label>
+                    <input asp-for="ChocolateProcessing" class="form-control" placeholder="Kakauu 70%" readonly />
+                    <span asp-validation-for="ChocolateProcessing" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Flavor" class="control-label">Sabor</label>
+                    <input asp-for="Flavor" class="form-control" placeholder="Kakauu Frutas Vermelhas" readonly />
+                    <span asp-validation-for="Flavor" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Validity" class="control-label">Validade</label>
+                    <input asp-for="Validity" class="form-control" placeholder="Data de Validade" readonly />
+                    <span asp-validation-for="Validity" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="price" class="control-label">Preço</label>
+                    <input asp-for="price" class="form-control" placeholder="$$" readonly />
+                    <span asp-validation-for="price" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="ChocolateTypek" class="control-label">Tipo de Chocolate</label>
+                    <div>
+                        <label class="radio-inline">
+                            <input type="radio" asp-for="ChocolateTypek" value="Amargo" readonly /> Amargo
+                        </label>
+                        <label class="radio-inline ms-3">
+                            <input type="radio" asp-for="ChocolateTypek" value="AoLeite" readonly /> Ao Leite
+                        </label>
+                        <label class="radio-inline ms-3">
+                            <input type="radio" asp-for="ChocolateTypek" value="MeioAmargo" readonly /> Meio Amargo
+                        </label>
+                        <label class="radio-inline ms-3">
+                            <input type="radio" asp-for="ChocolateTypek" value="Branco" readonly /> Branco
+                        </label>
+                    </div>
+                    <span asp-validation-for="ChocolateTypek" class="text-danger"></span>
+                </div>
+
+                <div class="form-group btn-group">
+                    <a class="btn btn-outline-primary custom" asp-action="Index">Mostrar tudo</a>
+                    <form asp-action="Delete" class="delete-form">
+                        <input type="hidden" asp-for="Id" />
+                        <input type="submit" value="Deletar" class="btn btn-danger" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('imagePreview');
+            output.src = $("#imageURL").val();
+        });
+    </script>
+}

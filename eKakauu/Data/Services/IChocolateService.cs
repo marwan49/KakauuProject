@@ -8,6 +8,6 @@ namespace eKakauu.Data.Services
         Task<Chocolate> GetByIdAsync(int id);
         Task AddAsync(Chocolate chocolate);
         Task<Chocolate> UpdateAsync(int id, Chocolate newChocolate);
-        void Delete(int id);
+        Task DeleteAsync(int id);
     }
 }

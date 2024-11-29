@@ -34,9 +34,9 @@
                 <form asp-action="Edit">
                     <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-                        <div class="form-group text-center">
-                            <img id="imagePreview" src="~/@Model.imageURL" alt="Imagem do Chocolate" class="image-preview" />
-                        </div>/
+                    <div class="form-group text-center">
+                        <img id="imagePreview" src="@Url.Content(Model.imageURL.StartsWith("http") ? Model.imageURL : "~/" + Model.imageURL)" alt="Imagem do Chocolate" class="image-preview" />
+                    </div>
 
                     <div class="form-group mb-3">
                         <label asp-for="imageURL" class="control-label">URL da Imagem</label>
@@ -94,7 +94,7 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="submit" value="Update" class="btn btn-outline-primary custom float-right" />
+                        <input type="submit" value="Atualizar" class="btn btn-outline-primary custom float-right" />
                         <a class="btn btn-outline-primary custom" asp-action="Index">Mostrar tudo</a>
                     </div>
                 </form>
@@ -102,16 +102,21 @@
         </div>
     </div>
 </div>
+
 @section Scripts {
     <script>
         $(document).ready(function () {
             var output = document.getElementById('imagePreview');
             output.src = $("#imageURL").val();
+
+            $("#imageURL").on("input", function () {
+                var newSrc = $(this).val();
+                if (!newSrc.startsWith('http') && !newSrc.startsWith('/')) {
+                    newSrc = '@Url.Content("~/")' + newSrc;
+                }
+                output.src = newSrc;
+            });
         });
 
-        $("#imageURL").on("change", function () {
-            var output = document.getElementById('imagePreview');
-            output.src = $(this).val();
-        });
     </script>
 }
