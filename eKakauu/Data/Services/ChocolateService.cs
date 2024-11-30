@@ -14,26 +14,26 @@ namespace eKakauu.Data.Services
 
         public async Task AddAsync(Chocolate chocolate)
         {
-            await _context.chocolates.AddAsync(chocolate);
+            await _context.Chocolates.AddAsync(chocolate);
             await _context.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(int id)
         {
-            var result = await _context.chocolates.FirstOrDefaultAsync(c => c.Id == id);
-            _context.chocolates.Remove(result);
+            var result = await _context.Chocolates.FirstOrDefaultAsync(c => c.Id == id);
+            _context.Chocolates.Remove(result);
             await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Chocolate>> GetAllAsync()
         {
-            var result = await _context.chocolates.ToListAsync();
+            var result = await _context.Chocolates.ToListAsync();
             return result;
         }
 
         public async Task<Chocolate> GetByIdAsync(int id)
         {
-            var resul = await _context.chocolates.FirstOrDefaultAsync(n => n.Id == id);
+            var resul = await _context.Chocolates.FirstOrDefaultAsync(n => n.Id == id);
             return resul;
         }
 

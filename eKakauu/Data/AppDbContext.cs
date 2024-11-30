@@ -1,5 +1,6 @@
 ﻿using eKakauu.Models;
 using Microsoft.EntityFrameworkCore;
+
 namespace eKakauu.Data
 {
     public class AppDbContext : DbContext
@@ -11,9 +12,17 @@ namespace eKakauu.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            // Configurando relacionamentos
+            modelBuilder.Entity<Chocolate>()
+                .HasOne(c => c.Brand)
+                .WithMany(b => b.Chocolates) // Relacionamento com a coleção Chocolates
+                .HasForeignKey(c => c.BrandId);
         }
 
-        public DbSet<Cocoa> Cocoas { get; set; }
-        public DbSet<Chocolate> chocolates { get; set; }
+        // DbSets para as tabelas
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<Chocolate> Chocolates { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

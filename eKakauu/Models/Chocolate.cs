@@ -14,7 +14,7 @@ namespace eKakauu.Models
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Campo processamento não pode ser vazio.")]
-        [StringLength(2, MinimumLength = 1, ErrorMessage = "O processamento deve ter ate 2 caracteres.")]
+        [StringLength(2, MinimumLength = 1, ErrorMessage = "O processamento deve ter até 2 caracteres.")]
         public string ChocolateProcessing { get; set; }
 
         [Required(ErrorMessage = "Campo sabor não pode ser vazio.")]
@@ -22,7 +22,6 @@ namespace eKakauu.Models
         public string Flavor { get; set; }
 
         [Required(ErrorMessage = "Campo validade não pode ser vazio.")]
-        [StringLength(50, MinimumLength = 2, ErrorMessage = "A validade deve ter entre 2 e 50 caracteres.")]
         public string Validity { get; set; }
 
         [Required(ErrorMessage = "Campo preço não pode ser vazio.")]
@@ -36,11 +35,12 @@ namespace eKakauu.Models
         [Required(ErrorMessage = "Campo tipo de chocolate não pode ser vazio.")]
         public ChocolateType ChocolateTypek { get; set; }
 
-        // Relationship
+        // Relationship with Brand
         [Required]
-        public int CocoaId { get; set; }
+        public int BrandId { get; set; }
 
-        [ForeignKey("CocoaId")]
-        public Cocoa? Cocoa { get; set; }
+        [ForeignKey("BrandId")]
+        public Brand? Brand { get; set; }
+       
     }
 }

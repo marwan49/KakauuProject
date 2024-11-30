@@ -1,5 +1,7 @@
 ﻿using eKakauu.Data.Enums;
 using eKakauu.Models;
+using System.Runtime.Intrinsics.X86;
+using System.Text.RegularExpressions;
 
 namespace eKakauu.Data
 {
@@ -14,76 +16,92 @@ namespace eKakauu.Data
                 // É aonde vamos adicionar os dados.
                 context.Database.EnsureCreated();
 
-                if (!context.Cocoas.Any())
+                if (!context.Brands.Any())
                 {
-                    context.Cocoas.AddRange(new List<Cocoa>()
+                    context.Brands.AddRange(new List<Brand>()
                     {
-                        new Cocoa()
+                        new Brand()
                         {
-
-                             Type = "Paraense",
-                             Origin = "Para Medicilandia",
-                             Description = "O cacau do Para e considerado um dos melhores do mundo." +
-                             "Ele e descrito como mais suave, devido ao processo de fermentacao da amendoa",
-                             CocoaType = CocoaType.Forasteiro,
-                             Harvest = "outubro de 2023"
-                        },
-                        new Cocoa()
-                        {
-
-                            Type = "Bahiano",
-                            Origin = "ilheus Baiha",
-                            Description = "O cacau da Bahia e conhecido como Bahia Superior ou Tipo 1 de cacau." +
-                            "E tambem e considerado um dos melhores do mundo junto com o Para.",
-                            CocoaType = CocoaType.Forasteiro,
-                            Harvest = "outubro de 2023"
+                            Name = "Kakauu",
+                            Description = "Kakauu é uma marca brasileira comprometida em apoiar pequenos e médios"+ 
+                                           "produtores de cacau, valorizando não apenas a excelência na qualidade da produção,"+
+                                           "mas também o respeito ao meio ambiente e a preservação das tradições agrícolas locais."+
+                                           "Com foco na sustentabilidade e no sabor único, Kakauu busca oferecer aos consumidores uma"+
+                                           "experiência inigualável, ao mesmo tempo em que contribui para o crescimento e fortalecimento"+ 
+                                           "da agricultura familiar."
                         },
                     });
                     context.SaveChanges();
                 }
 
-                if (!context.chocolates.Any())
+                if (!context.Users.Any())
                 {
-                    context.chocolates.AddRange(new List<Chocolate>()
+                    context.Users.AddRange(new List<User>()
+                    {
+                        new User()
+                        {
+                            Username = "UserA",
+                            Email = "usera@example.com",
+                            Password = "Password123"
+                        },
+                        new User()
+                        {
+                            Username = "UserB",
+                            Email = "userb@example.com",
+                            Password = "Password123"
+                        },
+                        new User()
+                        {
+                            Username = "UserC",
+                            Email = "userc@example.com",
+                            Password = "Password123"
+                        }
+                    });
+                    context.SaveChanges();
+                }
+
+                if (!context.Chocolates.Any())
+                {
+                    context.Chocolates.AddRange(new List<Chocolate>()
                     {
                         new Chocolate()
                         {
-                            imageURL = "ImageKakauu/chocolate.jpg",
                             Name = "Incrivel KakauDark",
-                            ChocolateProcessing = "80%",
+                            ChocolateProcessing = "80",
                             Flavor = "Kakau Amargo",
                             Validity = "20/01/2025",
                             price = 9.00,
+                            imageURL = "ImageKakauu/chocolate.jpg",
                             ChocolateTypek = ChocolateType.Amargo,
-                            CocoaId = 2,
+                            BrandId = 1 
                         },
                         new Chocolate()
                         {
-                            imageURL = "ImageKakauu/ChocolateBranco.jpeg",
                             Name = "Incrivel KakauWhite",
                             ChocolateProcessing = "",
                             Flavor = "Kakau Branco",
                             Validity = "20/01/2025",
                             price = 9.00,
+                            imageURL = "ImageKakauu/ChocolateBranco.jpeg",
                             ChocolateTypek = ChocolateType.Branco,
-                            CocoaId = 1,
+                            BrandId = 1 
                         },
                         new Chocolate()
                         {
-                            imageURL = "ImageKakauu/ChocolateMaracuja.jpeg",
                             Name = "Kakau Ao Leite Com Maracuja Cremoso",
-                            ChocolateProcessing = "40%",
+                            ChocolateProcessing = "40",
                             Flavor = "Maracuja",
                             Validity = "20/01/2025",
                             price = 12.00,
+                            imageURL = "ImageKakauu/ChocolateMaracuja.jpeg",
                             ChocolateTypek = ChocolateType.AoLeite,
-                            CocoaId = 1,
+                            BrandId = 1 
                         },
                     });
                     context.SaveChanges();
                 }
+
             }
         }
-
     }
 }
